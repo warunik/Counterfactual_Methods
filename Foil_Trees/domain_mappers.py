@@ -9,11 +9,9 @@ import sklearn
 import warnings
 import itertools
 import scipy
-
-from sklearn.utils import check_random_state
-
 from .rules import Literal, Operator
 from .utils import cache, check_stringvar, show_image, rbf, Encoder
+from sklearn.utils import check_random_state
 
 # Suppress FutureWarning of sklearn
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -65,8 +63,8 @@ class DomainMapper:
                     return np.unravel_index((self.contrast_class == contrast).argmax(),
                                              self.contrast_class.shape)[0]
                 else:
-                    warnings.warn(f'Unknown foil {contrast}, ',
-                                   'using default foil_method')
+                    warnings.warn(f'Unknown foil {contrast}, using default foil_method', UserWarning)
+
                     return None
         else:
             if self.contrast_class is not None:

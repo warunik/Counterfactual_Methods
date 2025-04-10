@@ -56,7 +56,7 @@ def checkargs(argchecks, checkfunc):
     """
     def dec(f):
         def argchecked_f(*a, **kw):
-            args = inspect.getargspec(f)[0]
+            args = inspect.getfullargspec(f)[0]
             vals = inspect.getcallargs(f, *a, **kw)
             for (arg, val) in argchecks:
                 if arg in args:

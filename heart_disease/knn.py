@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
 from Foil_Trees import domain_mappers, contrastive_explanation
 
 SEED = np.random.RandomState(1994)
@@ -33,7 +33,9 @@ dm = domain_mappers.DomainMapperTabular(
 )
 
 # Train model
-model = RandomForestClassifier(random_state=SEED).fit(X_train, y_train)
+model = KNeighborsClassifier(
+    n_neighbors=5
+).fit(X_train, y_train)
 
 # Evaluation
 print('F1 Score:', metrics.f1_score(y_test, model.predict(X_test), average='weighted'))

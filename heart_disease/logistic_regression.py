@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 from Foil_Trees import domain_mappers, contrastive_explanation
 
 SEED = np.random.RandomState(1994)
@@ -33,13 +33,16 @@ dm = domain_mappers.DomainMapperTabular(
 )
 
 # Train model
-model = RandomForestClassifier(random_state=SEED).fit(X_train, y_train)
+model = LogisticRegression(
+    random_state=SEED,
+    max_iter=1000
+).fit(X_train, y_train)
 
 # Evaluation
 print('F1 Score:', metrics.f1_score(y_test, model.predict(X_test), average='weighted'))
 
 # Explanation
-sample = X_test[2]
+sample = X_test[1]
 print('\nFeatures:', feature_names)
 print('Sample:', sample)
 print('\nTrue:', target_names[y_test[0]])

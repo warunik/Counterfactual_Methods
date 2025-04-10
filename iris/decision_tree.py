@@ -2,7 +2,7 @@ import numpy as np
 from sklearn import metrics
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
 from Foil_Trees import domain_mappers, contrastive_explanation
 
 SEED = np.random.RandomState(1994)
@@ -10,27 +10,17 @@ SEED = np.random.RandomState(1994)
 # Data loading and preparation
 iris = load_iris()
 X_train, X_test, y_train, y_test = train_test_split(
-    iris.data, 
-    iris.target, 
-    test_size=0.3, 
-    random_state=SEED
-)
+    iris.data, iris.target, test_size=0.3, random_state=SEED)
 
 # Domain mapper setup
 dm = domain_mappers.DomainMapperTabular(
     train_data=X_train,
     feature_names=iris.feature_names,
-    contrast_names=iris.target_names.tolist()
-)
+    contrast_names=iris.target_names.tolist())
 
 # Model training
-model = LogisticRegression(
-    random_state=SEED,
-    max_iter=1000,  # Increased for convergence
-    multi_class='multinomial'  # For >2 classes
-).fit(X_train, y_train)
+model = DecisionTreeClassifier(random_state=SEED).fit(X_train, y_train)
 
-# Evaluation
 print('Classifier performance (F1):', metrics.f1_score(
     y_test, 
     model.predict(X_test), 

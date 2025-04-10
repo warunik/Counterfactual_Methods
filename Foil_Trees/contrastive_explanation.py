@@ -23,7 +23,7 @@ from itertools import groupby
 from sklearn.utils import check_random_state
 
 from .rules import Operator, Literal
-from .domain_mappers import DomainMapper
+from .domain_mappers import DomainMapper, DomainMapperTabular
 from .explanators import Explanator, TreeExplanator
 from .fact_foil import FactFoilClassification, FactFoilRegression
 

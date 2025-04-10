@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn import metrics
-from sklearn.datasets import load_iris
+from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from Foil_Trees import domain_mappers, contrastive_explanation  # Clean import after package setup
@@ -8,19 +8,19 @@ from Foil_Trees import domain_mappers, contrastive_explanation  # Clean import a
 SEED = np.random.RandomState(1994)
 
 # Data loading and preparation
-iris = load_iris()
+diabetes = load_breast_cancer()
 X_train, X_test, y_train, y_test = train_test_split(
-    iris.data, 
-    iris.target, 
-    test_size=0.3,
+    diabetes.data, 
+    diabetes.target, 
+    test_size=0.3, 
     random_state=SEED
 )
 
 # Domain mapper setup
-dm = contrastive_explanation.DomainMapperTabular(
+dm = domain_mappers.DomainMapperTabular(
     train_data=X_train,
-    feature_names=iris.feature_names,
-    contrast_names=iris.target_names.tolist()
+    feature_names=diabetes.feature_names,
+    contrast_names=diabetes.target_names.tolist()
 )
 
 # Model training
@@ -34,12 +34,12 @@ print('Classifier performance (F1):', metrics.f1_score(
 ))
 
 # Explanation generation
-sample = X_test[1]
-print('\nFeature names:', iris.feature_names)
+sample = X_test[20]
+print('\nFeature names:', diabetes.feature_names)
 print('Sample values:', sample)
 
-print('\nTrue class:', iris.target_names[y_test[5]])
-print('Predicted class:', iris.target_names[model.predict([sample])[0]])
+print('\nTrue class:', diabetes.target_names[y_test[5]])
+print('Predicted class:', diabetes.target_names[model.predict([sample])[0]])
 
 # Generate explanation
 exp = contrastive_explanation.ContrastiveExplanation(dm)
@@ -47,7 +47,7 @@ exp = contrastive_explanation.ContrastiveExplanation(dm)
 print("\nExplanation:", exp.explain_instance_domain(model.predict_proba, sample), "\n")
 
 
-foil_class_idx = iris.target_names.tolist().index('versicolor')
+#foil_class_idx = diabetes.target_names.tolist().index('versicolor')
 #print("\nExplanation:", exp.explain_instance_domain(model.predict_proba, sample, foil=foil_class_idx))
 
 # sample = X_test[5].reshape(1, -1)  # Reshape upfront

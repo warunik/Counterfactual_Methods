@@ -13,6 +13,8 @@ from .rules import Literal, Operator
 from .utils import cache, check_stringvar, show_image, rbf, Encoder
 from sklearn.utils import check_random_state
 
+from skimage.segmentation import quickshift, felzenszwalb, slic
+
 # Suppress FutureWarning of sklearn
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
@@ -445,41 +447,60 @@ class DomainMapperTabular(DomainMapper):
         return ' and '.join(rules)
 
     def explain(self,
-                fact,
-                foil,
-                counterfactuals,
-                factuals,
-                confidence,
-                fidelity,
-                time,
+            fact,
+            foil,
+            counterfactuals,
+            factuals,
+            confidence,
+            fidelity,
+            time,
                 **kwargs):
         """Explain an instance using the results of
-        ContrastiveExplanation.explain_instance()
-
-        Args:
-            fact: ID of fact
-            foil: ID of foil
-            counterfactuals: List of Literals that form
-                explanation as disjoint set of foil and
-                not-fact rules
-            factuals: List of Literals that form explanation
-                as set of fact rules
-            confidence [0, 1]: Confidence of explanation
-                on neighborhood data
-            fidelity: ...
-            time: Time taken to explain (s)
-        """
-        fact = self.map_contrast_names(fact)
-        foil = self.map_contrast_names(foil)
-
-        e = f"The model predicted '{fact}' instead of '{foil}' " \
-            f"because '{self.rule_to_str(counterfactuals)}'"
-
+        ContrastiveExplanation.explain_instance()"""
+        
+        # Map IDs to names
+        fact_name = self.map_contrast_names(fact)
+        foil_name = self.map_contrast_names(foil)
+        
+        # Create table header
+    
+        table = [
+            "|-------------------|--------------------------------------------------------------|",
+            "| {:<17} | {:<60} |".format("Aspect", "Details"),
+            "|-------------------|--------------------------------------------------------------|"
+        ]
+        
+        # Add explanation components
+        table.append("| {:<17} | {:<60} |".format("Predicted Class", fact_name))
+        table.append("| {:<17} | {:<60} |".format("Contrast Class", foil_name))
+        table.append("| {:<17} | {:<60} |".format(
+            "Counterfactuals", 
+            self.rule_to_str(counterfactuals) or "N/A"
+        ))
+        
+        if factuals:
+            table.append("| {:<17} | {:<60} |".format(
+                "Factual Rules",
+                self.rule_to_str(factuals, remove_last=True) or "N/A"
+            ))
+        
+        # Add metrics
+        table.append("| {:<17} | {:<60.1%} |".format("Confidence", confidence))
+        table.append("| {:<17} | {:<60.1%} |".format("Fidelity", fidelity))
+        table.append("| {:<17} | {:<60.2f} |".format("Time Taken(s)", time))
+        table.append("|-------------------|--------------------------------------------------------------|")
+        
+        # Combine into final output
+        explanation_table = "\n".join(table)
+        
         if factuals is None:
-            return e
+            return explanation_table
         else:
-            return (e, f"The model predicted '{fact}' because "
-                       f"'{self.rule_to_str(factuals, remove_last=True)}'")
+            return (
+                explanation_table,
+                "\nAdditional Factual Explanation:\n" +
+                self.rule_to_str(factuals, remove_last=True)
+            )
 
 
 class DomainMapperPandas(DomainMapperTabular):
@@ -641,7 +662,7 @@ class DomainMapperImageSegments(DomainMapper):
                               n_samples=30,
                               batch_size=30,
                               seed=1):
-        from skimage.segmentation import quickshift, felzenszwalb, slic
+
 
         self.image = sample
 

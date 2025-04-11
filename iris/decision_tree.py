@@ -39,3 +39,38 @@ print('Predicted class:', iris.target_names[model.predict([sample])[0]])
 exp = contrastive_explanation.ContrastiveExplanation(dm)
 
 print("\nExplanation:", exp.explain_instance_domain(model.predict_proba, sample), "\n")
+
+
+def manual_prediction():
+    print("\n" + "="*40)
+    print("Manual Iris Species Prediction")
+    print("="*40)
+    
+    try:
+        # Get manual input
+        sepal_length = float(input("Enter sepal length (cm): "))
+        sepal_width = float(input("Enter sepal width (cm): "))
+        petal_length = float(input("Enter petal length (cm): "))
+        petal_width = float(input("Enter petal width (cm): "))
+        
+        # Create sample array
+        manual_sample = np.array([
+            sepal_length, 
+            sepal_width, 
+            petal_length, 
+            petal_width
+        ]).reshape(1, -1)
+        
+        # Get prediction and explanation
+        prediction = model.predict(manual_sample)[0]
+        print("\n", exp.explain_instance_domain(model.predict_proba, manual_sample), "\n")
+    
+        
+    except ValueError:
+        print("Error: Please enter valid numerical values in centimeters")
+
+# Run the manual prediction interface
+while True:
+    manual_prediction()
+    if input("\nCheck another sample? (y/n): ").lower() != 'y':
+        break

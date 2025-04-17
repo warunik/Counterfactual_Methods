@@ -28,14 +28,66 @@ print('Classifier performance (F1):', metrics.f1_score(
 ))
 
 # Explanation generation
-sample = X_test[1]
-print('\nFeature names:', iris.feature_names)
-print('Sample values:', sample)
+sample = X_test[5]
+
+def print_feature_table(feature_names, sample):
+    """Print feature names and values in a table format"""
+    # Ensure sample is 1D array
+    sample = sample.reshape(-1)
+    
+    # Create table header
+    print("|----------------------------------------|")
+    print("| {:<20} | {:<15} |".format('Feature Name', 'Value'))
+    print("|----------------------------------------|")
+    
+    # Print each feature-value pair
+    for name, value in zip(feature_names, sample):
+        print("| {:<20} | {:<15.2f} |".format(name, value))
+
+    print("|----------------------------------------|")
+
+# Usage in your existing code:
+print("\nSample Details:")
+print_feature_table(iris.feature_names, sample)
 
 print('\nTrue class:', iris.target_names[y_test[5]])
-print('Predicted class:', iris.target_names[model.predict([sample])[0]])
+print('Predicted class:', iris.target_names[model.predict([sample])[0]], '\n')
 
 # Generate explanation
 exp = contrastive_explanation.ContrastiveExplanation(dm)
 
-print("\nExplanation:", exp.explain_instance_domain(model.predict_proba, sample), "\n")
+print(exp.explain_instance_domain(model.predict_proba, sample))
+
+def manual_prediction():
+    print("\n" + "="*40)
+    print("Manual Iris Species Prediction")
+    print("="*40)
+    
+    try:
+        # Get manual input
+        sepal_length = float(input("Enter sepal length (cm): "))
+        sepal_width = float(input("Enter sepal width (cm): "))
+        petal_length = float(input("Enter petal length (cm): "))
+        petal_width = float(input("Enter petal width (cm): "))
+        
+        # Create sample array
+        manual_sample = np.array([
+            sepal_length, 
+            sepal_width, 
+            petal_length, 
+            petal_width
+        ]).reshape(1, -1)
+        
+        # Get prediction and explanation
+        prediction = model.predict(manual_sample)[0]
+        print("\n", exp.explain_instance_domain(model.predict_proba, manual_sample), "\n")
+    
+        
+    except ValueError:
+        print("Error: Please enter valid numerical values in centimeters")
+
+# Run the manual prediction interface
+while True:
+    manual_prediction()
+    if input("\nCheck another sample? (y/n): ").lower() != 'y':
+        break

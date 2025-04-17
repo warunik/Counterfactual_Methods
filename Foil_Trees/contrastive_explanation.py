@@ -231,10 +231,9 @@ class ContrastiveExplanation:
                 e = TreeExplanator()
 
             if not self.regression:
-                t = sklearn.tree.DecisionTreeClassifier(random_state=self.seed,
-                                                        class_weight='balanced')
+                t = sklearn.tree.DecisionTreeClassifier(max_depth=3, min_samples_split=2, random_state=self.seed, class_weight='balanced')
             else:
-                t = sklearn.tree.DecisionTreeRegressor(random_state=self.seed)
+                t = sklearn.tree.DecisionTreeClassifier(max_depth=3, min_samples_split=2, random_state=self.seed, class_weight='balanced')
 
             t.fit(xs, ys, sample_weight=weights)
 
@@ -243,6 +242,24 @@ class ContrastiveExplanation:
                 factual = self.form_explanation(fact_rule, contrastive=False)[:-1]
             else:
                 factual = None
+
+            from sklearn.tree import export_graphviz
+            import graphviz
+
+            # Export to DOT format
+            dot_data = export_graphviz(
+                t,
+                out_file=None,
+                feature_names=[f"Feature {i}" for i in range(xs.shape[1])],
+                class_names=["Class 0", "Class 1"] if not self.regression else None,
+                filled=True,
+                rounded=True
+            )
+
+            # Render and display
+            graph = graphviz.Source(dot_data)
+            graph.render("decision_tree", format="png", cleanup=True)  # Saves as "decision_tree.png"
+            graph.view()  # Opens the visualization
 
         # Warnings
         if not counterfactual:

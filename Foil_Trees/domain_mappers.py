@@ -478,11 +478,10 @@ class DomainMapperTabular(DomainMapper):
             self.rule_to_str(counterfactuals) or "N/A"
         ))
         
-        if factuals:
-            table.append("| {:<17} | {:<60} |".format(
-                "Factual Rules",
-                self.rule_to_str(factuals, remove_last=True) or "N/A"
-            ))
+        # table.append("| {:<17} | {:<60} |".format(
+        #     "Factual Rules",
+        #     self.rule_to_str(factuals, remove_last=True) or "N/A"
+        # ))
         
         # Add metrics
         table.append("| {:<17} | {:<60.1%} |".format("Confidence", confidence))

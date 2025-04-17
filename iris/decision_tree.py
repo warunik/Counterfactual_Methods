@@ -29,8 +29,25 @@ print('Classifier performance (F1):', metrics.f1_score(
 
 # Explanation generation
 sample = X_test[1]
-print('\nFeature names:', iris.feature_names)
-print('Sample values:', sample)
+
+def print_feature_table(feature_names, sample):
+    """Print feature names and values in a table format"""
+    # Ensure sample is 1D array
+    sample = sample.reshape(-1)
+    
+    # Create table header
+    print("|----------------------------------------|")
+    print("| {:<20} | {:<15} |".format('Feature Name', 'Value'))
+    print("|----------------------------------------|")
+    
+    # Print each feature-value pair
+    for name, value in zip(feature_names, sample):
+        print("| {:<20} | {:<15.2f} |".format(name, value))
+
+    print("|----------------------------------------|")
+
+print("\nSample Details:")
+print_feature_table(iris.feature_names, sample)
 
 print('\nTrue class:', iris.target_names[y_test[5]])
 print('Predicted class:', iris.target_names[model.predict([sample])[0]])
@@ -38,7 +55,7 @@ print('Predicted class:', iris.target_names[model.predict([sample])[0]])
 # Generate explanation
 exp = contrastive_explanation.ContrastiveExplanation(dm)
 
-print("\nExplanation:", exp.explain_instance_domain(model.predict_proba, sample), "\n")
+print("\n", exp.explain_instance_domain(model.predict_proba, sample), "\n")
 
 
 def manual_prediction():

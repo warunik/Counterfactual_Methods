@@ -82,6 +82,7 @@ def manual_prediction():
         
         # Get prediction and explanation
         prediction = model.predict(manual_sample)[0]
+        print("Predicted class:", iris.target_names[prediction])
         print("\n", exp.explain_instance_domain(model.predict_proba, manual_sample), "\n")
     
         

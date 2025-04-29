@@ -27,8 +27,8 @@ print('Classifier performance (F1):', metrics.f1_score(
     average='weighted'
 ))
 
-# Explanation generation
-sample = X_test[1]
+test_num = 2
+sample = X_test[test_num]
 
 def print_feature_table(feature_names, sample):
     """Print feature names and values in a table format"""
@@ -49,7 +49,7 @@ def print_feature_table(feature_names, sample):
 print("\nSample Details:")
 print_feature_table(iris.feature_names, sample)
 
-print('\nTrue class:', iris.target_names[y_test[5]])
+print('\nTrue class:', iris.target_names[y_test[test_num]])
 print('Predicted class:', iris.target_names[model.predict([sample])[0]])
 
 # Generate explanation
@@ -80,6 +80,7 @@ def manual_prediction():
         
         # Get prediction and explanation
         prediction = model.predict(manual_sample)[0]
+        print("Predicted class:", iris.target_names[prediction])
         print("\n", exp.explain_instance_domain(model.predict_proba, manual_sample), "\n")
     
         

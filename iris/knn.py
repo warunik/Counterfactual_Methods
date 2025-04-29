@@ -80,7 +80,8 @@ def manual_prediction():
         
         # Get prediction and explanation
         prediction = model.predict(manual_sample)[0]
-        print("\n", exp.explain_instance_domain(model.predict_proba, manual_sample), "\n")
+        print("\nPredicted class:", iris.target_names[prediction])
+        print("\nPredicted class of Foil:\n", exp.explain_instance_domain(model.predict_proba, manual_sample), "\n")
     
         
     except ValueError:

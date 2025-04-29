@@ -21,6 +21,7 @@ import time
 
 from itertools import groupby
 from sklearn.utils import check_random_state
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 
 from .rules import Operator, Literal
 from .domain_mappers import DomainMapper, DomainMapperTabular
@@ -165,8 +166,11 @@ class ContrastiveExplanation:
             Tuple (fact, foil, counterfactual), feed into the explain()
             function in the domain_mapper
         """
+
+        
         if type(fact_sample) is pd.core.series.Series:
             fact_sample = np.array(fact_sample)
+            
 
         st = time.time()
 
@@ -176,6 +180,7 @@ class ContrastiveExplanation:
                                                 epsilon=epsilon)
         else:
             self.fact_foil = FactFoilClassification(verbose=self.verbose)
+            
 
         if foil is not None:
             foil = self.domain_mapper.map_contrast_names(foil, inverse=True)
@@ -231,35 +236,26 @@ class ContrastiveExplanation:
                 e = TreeExplanator()
 
             if not self.regression:
-                t = sklearn.tree.DecisionTreeClassifier(max_depth=3, min_samples_split=2, random_state=self.seed, class_weight='balanced')
+                t = DecisionTreeClassifier(max_depth=3, min_samples_split=2, random_state=self.seed, class_weight='balanced')
             else:
-                t = sklearn.tree.DecisionTreeClassifier(max_depth=3, min_samples_split=2, random_state=self.seed, class_weight='balanced')
+                t = DecisionTreeRegressor(max_depth=3, min_samples_split=2, random_state=self.seed, class_weight='balanced')
 
             t.fit(xs, ys, sample_weight=weights)
+            # Visualize the internal decision tree used in the explanation
+            import matplotlib.pyplot as plt
+            from sklearn.tree import plot_tree
+
+            plt.figure(figsize=(16, 8))
+            plot_tree(t, feature_names=self.domain_mapper.feature_names, filled=True)
+            plt.title("Local FOIL Tree Used for Explanation")
+            plt.show()
+
 
             if t.tree_.node_count > 1:
                 fact_rule = e.decision_path(t, encoded_fact_sample)
                 factual = self.form_explanation(fact_rule, contrastive=False)[:-1]
             else:
                 factual = None
-
-            from sklearn.tree import export_graphviz
-            import graphviz
-
-            # Export to DOT format
-            dot_data = export_graphviz(
-                t,
-                out_file=None,
-                feature_names=[f"Feature {i}" for i in range(xs.shape[1])],
-                class_names=["Class 0", "Class 1"] if not self.regression else None,
-                filled=True,
-                rounded=True
-            )
-
-            # Render and display
-            graph = graphviz.Source(dot_data)
-            graph.render("decision_tree", format="png", cleanup=True)  # Saves as "decision_tree.png"
-            graph.view()  # Opens the visualization
 
         # Warnings
         if not counterfactual:

@@ -5,6 +5,8 @@ from sklearn import metrics
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from Foil_Trees import domain_mappers, contrastive_explanation
+from sklearn.tree import plot_tree
+import matplotlib.pyplot as plt
 
 SEED = np.random.RandomState(1994)
 
@@ -50,3 +52,8 @@ print('Predicted:', target_names[model.predict([sample])[0]])
 
 exp = contrastive_explanation.ContrastiveExplanation(dm)
 print("\nExplanation:", exp.explain_instance_domain(model.predict_proba, sample))
+
+plt.figure(figsize=(20, 10))
+plot_tree(model, feature_names=feature_names, filled=True)
+plt.title("Decision Tree Visualization")
+plt.show()

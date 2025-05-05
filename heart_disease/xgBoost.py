@@ -47,7 +47,7 @@ sample = X_test[2]
 print('\nFeatures:', feature_names)
 print('Sample:', sample)
 print('\nTrue:', target_names[y_test[0]])
-print('Predicted:', target_names[model.predict([sample])[0]])
+print('Predicted:', target_names[model.predict([sample])[0]],"\n")
 
 exp = contrastive_explanation.ContrastiveExplanation(dm)
-print("\nExplanation:", exp.explain_instance_domain(model.predict_proba, sample))
+print(exp.explain_instance_domain(model.predict_proba, sample))

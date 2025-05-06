@@ -8,14 +8,18 @@ from sklearn.metrics import classification_report, confusion_matrix, roc_auc_sco
 from imblearn.over_sampling import SMOTE
 import matplotlib.pyplot as plt
 import seaborn as sns
+from Foil_Trees import domain_mappers, contrastive_explanation
 
 # --- Load dataset ---
 # Replace with your actual dataset path
 df = pd.read_csv('Datasets/taiwan.csv')  # Expected to have 96 features and a 'class' column (0 or 1)
+target_col = 'Bankrupt?' 
 
 # --- Features and target ---
-X = df.drop(columns='Bankrupt?')
-y = df['Bankrupt?']
+X = df.drop(columns=target_col).values     # <-- this is the key: .values converts to numpy
+y = df[target_col].values
+
+feature_names = df.drop(columns=target_col).columns.tolist()
 
 # --- Train-test split ---
 X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=0.2, random_state=42)
@@ -73,7 +77,7 @@ plt.show()
 import numpy as np
 import matplotlib.pyplot as plt
 
-feature_cols = X.columns.tolist()
+feature_cols = df.drop(columns=target_col).columns.tolist()
 
 # 1) Extract importances
 rf_imps  = rf.feature_importances_
@@ -114,3 +118,39 @@ def plot_top(df, model_name, top_n=10):
 plot_top(rf_imp_df,  'Random Forest')
 plot_top(xgb_imp_df, 'XGBoost')
 
+
+target_names = ['Non-Bankrupt', 'Bankrupt']  # Explicit mapping
+
+dm = domain_mappers.DomainMapperTabular(
+    train_data=X_train,
+    feature_names=feature_names,
+    contrast_names=target_names
+)
+
+idx = 1  # Index of the sample to explain
+sample = X_test[idx]
+
+# print(f"\nSample #{idx} values:")
+# for name, v in zip(feature_names, sample):
+#     print(f"  {name}: {v:.2f}")
+
+# pred = rf.predict(sample.reshape(1, -1))[0]
+# print("Random Forest")
+# print("\nTrue class:", 'Bankrupt' if y_test[idx] else 'Non-Bankrupt')
+# print("Predicted class:", 'Bankrupt' if pred else 'Non-Bankrupt')
+
+
+
+# pred = xgb.predict(sample.reshape(1, -1))[0]
+# print("XG Boost")
+# print("\nTrue class:", 'Bankrupt' if y_test[idx] else 'Non-Bankrupt')
+# print("Predicted class:", 'Bankrupt' if pred else 'Non-Bankrupt')
+
+
+# Generate explanation
+exp = contrastive_explanation.ContrastiveExplanation(dm)
+
+print(exp.explain_instance_domain(rf.predict_proba, sample))
+
+print("\n######################################################\n")
+print(exp.explain_instance_domain(xgb.predict_proba, sample))

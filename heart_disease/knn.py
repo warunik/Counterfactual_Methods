@@ -41,10 +41,11 @@ model = KNeighborsClassifier(
 print('F1 Score:', metrics.f1_score(y_test, model.predict(X_test), average='weighted'))
 
 # Explanation
-sample = X_test[2]
+tno = 2
+sample = X_test[tno]
 print('\nFeatures:', feature_names)
 print('Sample:', sample)
-print('\nTrue:', target_names[y_test[0]])
+print('\nTrue:', target_names[y_test[tno]])
 print('Predicted:', target_names[model.predict([sample])[0]])
 
 exp = contrastive_explanation.ContrastiveExplanation(dm)

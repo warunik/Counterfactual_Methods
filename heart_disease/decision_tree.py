@@ -57,3 +57,4 @@ plt.figure(figsize=(20, 10))
 plot_tree(model, feature_names=feature_names, filled=True)
 plt.title("Decision Tree Visualization")
 plt.show()
+

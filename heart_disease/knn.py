@@ -49,4 +49,4 @@ print('\nTrue:', target_names[y_test[tno]])
 print('Predicted:', target_names[model.predict([sample])[0]])
 
 exp = contrastive_explanation.ContrastiveExplanation(dm)
-print("\nExplanation:", exp.explain_instance_domain(model.predict_proba, sample))
+print("\n", exp.explain_instance_domain(model.predict_proba, sample))

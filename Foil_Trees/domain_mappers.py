@@ -488,6 +488,8 @@ class DomainMapperTabular(DomainMapper):
         table.append("| {:<17} | {:<60.1%} |".format("Fidelity", fidelity))
         table.append("| {:<17} | {:<60.2f} |".format("Time Taken(s)", time))
         table.append("|-------------------|--------------------------------------------------------------|")
+
+        
         
         # Combine into final output
         explanation_table = "\n".join(table)

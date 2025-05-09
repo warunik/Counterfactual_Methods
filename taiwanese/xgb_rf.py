@@ -8,7 +8,9 @@ from sklearn.metrics import classification_report, confusion_matrix, roc_auc_sco
 from imblearn.over_sampling import SMOTE
 import matplotlib.pyplot as plt
 import seaborn as sns
-from Foil_Trees import domain_mappers, contrastive_explanation
+from Foil_Trees import domain_mappers, contrastive_explanation, explanators
+
+SEED = np.random.RandomState(1994)
 
 # --- Load dataset ---
 # Replace with your actual dataset path
@@ -129,6 +131,8 @@ dm = domain_mappers.DomainMapperTabular(
 
 idx = 1  # Index of the sample to explain
 sample = X_test[idx]
+predicted_label = rf.predict([sample])[0] # Predicted class for Random Forest
+# predicted_label = xgb.predict([sample])[0] # Predicted class for XGBoost
 
 # print(f"\nSample #{idx} values:")
 # for name, v in zip(feature_names, sample):
@@ -154,3 +158,48 @@ print(exp.explain_instance_domain(rf.predict_proba, sample))
 
 print("\n######################################################\n")
 print(exp.explain_instance_domain(xgb.predict_proba, sample))
+
+#--- Add TreeExplanator ---
+# Prepare binary classification: predicted class vs others
+fact = predicted_label  # Class we want to explain
+foil = 1 - fact         # Contrast class
+y_binary = np.where(y_train == fact, 1, 0)  # 1=fact, 0=foil
+
+# Initialize and train tree explainer
+tree_explainer = explanators.TreeExplanator(
+    generalize=2,  # Control tree complexity
+    verbose=True,
+    seed=SEED
+)
+
+# Get decision path explanation
+path, confidence, fidelity = tree_explainer.get_rule(
+    fact_sample=sample,
+    fact=fact,
+    foil=foil,
+    xs=X_train,
+    ys=y_binary,
+    weights=None,
+    foil_strategy='informativeness'
+)
+
+from sklearn.tree import plot_tree
+from sklearn.tree import export_text
+
+# Visualize the decision tree
+plt.figure(figsize=(20, 10))
+plot_tree(
+    tree_explainer.tree,
+    filled=True,
+    feature_names=feature_names,
+    class_names=[f"Not {target_names[fact]}", target_names[fact]]
+)
+plt.title(f"Contrastive Tree: {target_names[fact]} vs {target_names[foil]}")
+plt.show()
+
+tree_rules = export_text(
+    tree_explainer.tree,
+    feature_names=feature_names,
+    decimals=2
+)
+print("\nDecision Tree Rules:\n", tree_rules)

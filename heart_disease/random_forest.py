@@ -81,10 +81,20 @@ model = RandomForestClassifier(random_state=SEED).fit(X_train, y_train)
 # Evaluate
 print('F1 Score:', metrics.f1_score(y_test, model.predict(X_test), average='weighted'))
 
+
+# --- For generated data ---
+dataset_path = Path("Datasets/synthetic_heart_data.csv")
+df_gen = pd.read_csv(dataset_path)
+X_gen = df.drop('target', axis=1).values
+y_gen = df['target'].values
+
+# Split data
+X_train_gen, X_test_gen, y_train_gen, y_test_gen = train_test_split(X_gen, y_gen, test_size=0.3, random_state=SEED)
+
 # Explanation setup
 tno = 2
-sample = X_test[tno]
-true_label = y_test[tno]
+sample = X_test_gen[tno]
+true_label = y_test_gen[tno]
 predicted_label = model.predict([sample])[0]
 
 print('\nFeatures:', feature_names)
@@ -99,7 +109,7 @@ dm = domain_mappers.DomainMapperTabular(
     contrast_names=target_names
 )
 exp = contrastive_explanation.ContrastiveExplanation(dm)
-print("\nBase Explanation:", exp.explain_instance_domain(model.predict_proba, sample))
+print("\n", exp.explain_instance_domain(model.predict_proba, sample))
 
 # --- Add TreeExplanator ---
 # Prepare binary classification: predicted class vs others

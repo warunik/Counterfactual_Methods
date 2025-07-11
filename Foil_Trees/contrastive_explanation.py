@@ -292,3 +292,14 @@ class ContrastiveExplanation:
         """
         return self.domain_mapper.explain(*self.explain_instance(*args,
                                                                  **kwargs))
+    
+
+    def explain_instance_domain_new(self,
+                                *args,
+                                **kwargs):
+        """Explain instance and map to domain. For arguments see
+        ContrastiveExplanation.explain_instance().
+        """
+        return self.domain_mapper.counterfactual_list(*self.explain_instance(*args,
+                                                                 **kwargs))
+

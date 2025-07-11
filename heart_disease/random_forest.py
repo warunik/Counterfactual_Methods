@@ -93,9 +93,18 @@ X_train_gen, X_test_gen, y_train_gen, y_test_gen = train_test_split(X_gen, y_gen
 
 # Explanation setup
 tno = 2
-sample = X_test_gen[tno]
-true_label = y_test_gen[tno]
-predicted_label = model.predict([sample])[0]
+# sample = X_test_gen[tno]
+# true_label = y_test_gen[tno]
+sample = [78,1,2,140,310,0,0,190,1,3.8,2,1,1]
+sample = np.array(sample)
+print(X_test_gen[tno])
+print("#################################################")
+
+if sample.ndim == 1:
+    sample = sample.reshape(1, -1)
+true_label = 1 
+predicted_label = model.predict(sample)[0]
+
 
 print('\nFeatures:', feature_names)
 print('Sample:', sample)

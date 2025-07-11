@@ -161,6 +161,10 @@ class DomainMapper:
     def explain(self, fact, foil, counterfactuals, confidence, **kwargs):
         """Form an explanation. Should be implemented in subclass."""
         raise NotImplementedError('Implemented in subclasses')
+    
+    def counterfactual_list(self, fact, foil, counterfactuals, confidence, **kwargs):
+        """Form an explanation. Should be implemented in subclass."""
+        raise NotImplementedError('Implemented in subclasses')
 
 
 class DomainMapperTabular(DomainMapper):
@@ -502,6 +506,21 @@ class DomainMapperTabular(DomainMapper):
                 "\nAdditional Factual Explanation:\n" +
                 self.rule_to_str(factuals, remove_last=True)
             )
+        
+
+    def counterfactual_list(self,
+            fact,
+            foil,
+            counterfactuals,
+            factuals,
+            confidence,
+            fidelity,
+            time,
+                **kwargs):
+        """Explain an instance using the results of
+        ContrastiveExplanation.explain_instance()"""
+        
+        return counterfactuals
 
 
 class DomainMapperPandas(DomainMapperTabular):

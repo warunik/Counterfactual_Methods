@@ -1,0 +1,451 @@
+sample_idx,original_class,true_class,cf_applied,cf_class,flip_successful,changes_made,explanation
+0,setosa,setosa,True,setosa,False,['petal width (cm): 0.500 → 0.798'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | setosa                                                       |
+| Contrast Class    | versicolor                                                   |
+| Counterfactuals   | petal width (cm) <= 0.798                                    |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 97.0%                                                        |
+| Time Taken(s)     | 0.01                                                         |
+|-------------------|--------------------------------------------------------------|"
+1,setosa,setosa,True,setosa,False,"['petal width (cm): 0.300 → 0.771', 'petal length (cm): 1.500 → 4.847']","|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | setosa                                                       |
+| Contrast Class    | versicolor                                                   |
+| Counterfactuals   | petal width (cm) <= 0.771 and petal length (cm) <= 4.847     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 97.0%                                                        |
+| Time Taken(s)     | 0.01                                                         |
+|-------------------|--------------------------------------------------------------|"
+2,versicolor,versicolor,True,versicolor,False,"['petal width (cm): 1.400 → 0.816', 'petal length (cm): 4.400 → 2.408']","|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.806 and petal length (cm) > 2.398       |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.01                                                         |
+|-------------------|--------------------------------------------------------------|"
+3,versicolor,virginica,True,virginica,True,['petal width (cm): 1.600 → 0.809'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.799                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.17                                                         |
+|-------------------|--------------------------------------------------------------|"
+4,versicolor,versicolor,False,,False,[],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | N/A                                                          |
+| Confidence        | 0.0%                                                         |
+| Fidelity          | 99.8%                                                        |
+| Time Taken(s)     | 0.13                                                         |
+|-------------------|--------------------------------------------------------------|"
+5,setosa,setosa,True,setosa,False,"['petal width (cm): 0.200 → 0.786', 'petal length (cm): 1.200 → 4.328']","|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | setosa                                                       |
+| Contrast Class    | versicolor                                                   |
+| Counterfactuals   | petal width (cm) <= 0.786 and petal length (cm) <= 4.328     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 86.4%                                                        |
+| Time Taken(s)     | 0.01                                                         |
+|-------------------|--------------------------------------------------------------|"
+6,versicolor,versicolor,True,versicolor,False,['petal width (cm): 1.400 → 0.809'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.799                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 99.8%                                                        |
+| Time Taken(s)     | 0.01                                                         |
+|-------------------|--------------------------------------------------------------|"
+7,versicolor,versicolor,False,,False,[],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | N/A                                                          |
+| Confidence        | 0.0%                                                         |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.13                                                         |
+|-------------------|--------------------------------------------------------------|"
+8,setosa,setosa,True,setosa,False,['petal width (cm): 0.300 → 0.788'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | setosa                                                       |
+| Contrast Class    | versicolor                                                   |
+| Counterfactuals   | petal width (cm) <= 0.788                                    |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 98.4%                                                        |
+| Time Taken(s)     | 0.01                                                         |
+|-------------------|--------------------------------------------------------------|"
+9,setosa,setosa,True,setosa,False,['petal width (cm): 0.300 → 0.786'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | setosa                                                       |
+| Contrast Class    | versicolor                                                   |
+| Counterfactuals   | petal width (cm) <= 0.786                                    |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 98.4%                                                        |
+| Time Taken(s)     | 0.14                                                         |
+|-------------------|--------------------------------------------------------------|"
+10,versicolor,versicolor,True,versicolor,False,['petal width (cm): 1.300 → 0.807'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.797                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.28                                                         |
+|-------------------|--------------------------------------------------------------|"
+11,virginica,virginica,True,virginica,False,['petal width (cm): 2.300 → 0.825'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.815                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 99.4%                                                        |
+| Time Taken(s)     | 0.12                                                         |
+|-------------------|--------------------------------------------------------------|"
+12,setosa,setosa,True,setosa,False,"['petal width (cm): 0.300 → 0.781', 'sepal width (cm): 2.300 → 2.773']","|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | setosa                                                       |
+| Contrast Class    | versicolor                                                   |
+| Counterfactuals   | petal width (cm) <= 0.781 and sepal width (cm) <= 2.773      |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 95.4%                                                        |
+| Time Taken(s)     | 0.24                                                         |
+|-------------------|--------------------------------------------------------------|"
+13,versicolor,versicolor,True,versicolor,False,['petal width (cm): 1.500 → 0.812'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.802                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.30                                                         |
+|-------------------|--------------------------------------------------------------|"
+14,virginica,virginica,True,versicolor,True,['petal width (cm): 1.800 → 0.802'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.792                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 99.8%                                                        |
+| Time Taken(s)     | 0.02                                                         |
+|-------------------|--------------------------------------------------------------|"
+15,setosa,setosa,True,setosa,False,['petal width (cm): 0.200 → 0.697'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | setosa                                                       |
+| Contrast Class    | versicolor                                                   |
+| Counterfactuals   | petal width (cm) <= 0.697                                    |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 98.2%                                                        |
+| Time Taken(s)     | 0.27                                                         |
+|-------------------|--------------------------------------------------------------|"
+16,virginica,virginica,True,virginica,False,['petal width (cm): 1.400 → 0.823'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.813                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.19                                                         |
+|-------------------|--------------------------------------------------------------|"
+17,versicolor,versicolor,False,,False,[],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | N/A                                                          |
+| Confidence        | 0.0%                                                         |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.19                                                         |
+|-------------------|--------------------------------------------------------------|"
+18,versicolor,versicolor,False,,False,[],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | N/A                                                          |
+| Confidence        | 0.0%                                                         |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.27                                                         |
+|-------------------|--------------------------------------------------------------|"
+19,virginica,virginica,True,virginica,False,['petal width (cm): 2.000 → 0.855'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.845                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.25                                                         |
+|-------------------|--------------------------------------------------------------|"
+20,versicolor,versicolor,False,,False,[],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | N/A                                                          |
+| Confidence        | 0.0%                                                         |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.22                                                         |
+|-------------------|--------------------------------------------------------------|"
+21,virginica,virginica,True,virginica,False,['petal width (cm): 2.400 → 0.888'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.878                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 99.8%                                                        |
+| Time Taken(s)     | 0.20                                                         |
+|-------------------|--------------------------------------------------------------|"
+22,virginica,virginica,False,,False,[],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | N/A                                                          |
+| Confidence        | 0.0%                                                         |
+| Fidelity          | 99.6%                                                        |
+| Time Taken(s)     | 0.36                                                         |
+|-------------------|--------------------------------------------------------------|"
+23,virginica,virginica,False,,False,[],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | N/A                                                          |
+| Confidence        | 0.0%                                                         |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.25                                                         |
+|-------------------|--------------------------------------------------------------|"
+24,setosa,setosa,True,setosa,False,"['petal width (cm): 0.200 → 0.780', 'petal length (cm): 1.600 → 4.626']","|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | setosa                                                       |
+| Contrast Class    | versicolor                                                   |
+| Counterfactuals   | petal width (cm) <= 0.78 and petal length (cm) <= 4.626      |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 98.2%                                                        |
+| Time Taken(s)     | 0.24                                                         |
+|-------------------|--------------------------------------------------------------|"
+25,setosa,setosa,True,setosa,False,['petal width (cm): 0.300 → 0.789'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | setosa                                                       |
+| Contrast Class    | versicolor                                                   |
+| Counterfactuals   | petal width (cm) <= 0.789                                    |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 85.4%                                                        |
+| Time Taken(s)     | 0.01                                                         |
+|-------------------|--------------------------------------------------------------|"
+26,setosa,setosa,True,setosa,False,['petal width (cm): 0.200 → 0.766'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | setosa                                                       |
+| Contrast Class    | versicolor                                                   |
+| Counterfactuals   | petal width (cm) <= 0.766                                    |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 92.6%                                                        |
+| Time Taken(s)     | 0.01                                                         |
+|-------------------|--------------------------------------------------------------|"
+27,versicolor,versicolor,True,versicolor,False,['petal width (cm): 1.000 → 0.828'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.818                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 98.4%                                                        |
+| Time Taken(s)     | 0.16                                                         |
+|-------------------|--------------------------------------------------------------|"
+28,virginica,versicolor,False,,False,[],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | N/A                                                          |
+| Confidence        | 0.0%                                                         |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.15                                                         |
+|-------------------|--------------------------------------------------------------|"
+29,virginica,virginica,True,virginica,False,['petal width (cm): 1.900 → 0.803'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.793                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.15                                                         |
+|-------------------|--------------------------------------------------------------|"
+30,virginica,virginica,True,versicolor,True,"['petal width (cm): 1.800 → 0.812', 'petal length (cm): 5.500 → 4.511']","|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.802 and petal length (cm) > 4.501       |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 99.8%                                                        |
+| Time Taken(s)     | 0.16                                                         |
+|-------------------|--------------------------------------------------------------|"
+31,virginica,virginica,False,,False,[],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | N/A                                                          |
+| Confidence        | 0.0%                                                         |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.01                                                         |
+|-------------------|--------------------------------------------------------------|"
+32,virginica,virginica,False,,False,[],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | N/A                                                          |
+| Confidence        | 0.0%                                                         |
+| Fidelity          | 70.2%                                                        |
+| Time Taken(s)     | 0.13                                                         |
+|-------------------|--------------------------------------------------------------|"
+33,virginica,virginica,False,,False,[],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | N/A                                                          |
+| Confidence        | 0.0%                                                         |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.16                                                         |
+|-------------------|--------------------------------------------------------------|"
+34,versicolor,versicolor,True,setosa,True,['petal width (cm): 1.300 → 0.798'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.788                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.15                                                         |
+|-------------------|--------------------------------------------------------------|"
+35,versicolor,versicolor,False,,False,[],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | N/A                                                          |
+| Confidence        | 0.0%                                                         |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.01                                                         |
+|-------------------|--------------------------------------------------------------|"
+36,setosa,setosa,True,setosa,False,"['petal width (cm): 0.200 → 0.797', 'petal length (cm): 1.400 → 4.629']","|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | setosa                                                       |
+| Contrast Class    | versicolor                                                   |
+| Counterfactuals   | petal width (cm) <= 0.797 and petal length (cm) <= 4.629     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 90.2%                                                        |
+| Time Taken(s)     | 0.01                                                         |
+|-------------------|--------------------------------------------------------------|"
+37,virginica,virginica,True,virginica,False,['petal width (cm): 2.300 → 0.850'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.84                                      |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.13                                                         |
+|-------------------|--------------------------------------------------------------|"
+38,virginica,virginica,True,versicolor,True,['petal width (cm): 1.800 → 0.807'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.797                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.15                                                         |
+|-------------------|--------------------------------------------------------------|"
+39,setosa,setosa,True,setosa,False,['petal width (cm): 0.200 → 0.796'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | setosa                                                       |
+| Contrast Class    | versicolor                                                   |
+| Counterfactuals   | petal width (cm) <= 0.796                                    |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 88.4%                                                        |
+| Time Taken(s)     | 0.01                                                         |
+|-------------------|--------------------------------------------------------------|"
+40,versicolor,versicolor,False,,False,[],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | N/A                                                          |
+| Confidence        | 0.0%                                                         |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.01                                                         |
+|-------------------|--------------------------------------------------------------|"
+41,setosa,setosa,True,setosa,False,"['petal width (cm): 0.100 → 0.701', 'petal length (cm): 1.500 → 0.432']","|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | setosa                                                       |
+| Contrast Class    | versicolor                                                   |
+| Counterfactuals   | petal width (cm) <= 0.701 and petal length (cm) > 0.422      |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 89.6%                                                        |
+| Time Taken(s)     | 0.41                                                         |
+|-------------------|--------------------------------------------------------------|"
+42,virginica,virginica,True,virginica,False,['petal width (cm): 1.800 → 0.812'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.802                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.40                                                         |
+|-------------------|--------------------------------------------------------------|"
+43,virginica,virginica,True,virginica,False,['petal width (cm): 2.000 → 0.819'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | virginica                                                    |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.809                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.02                                                         |
+|-------------------|--------------------------------------------------------------|"
+44,versicolor,versicolor,True,versicolor,False,['petal width (cm): 1.500 → 0.816'],"|-------------------|--------------------------------------------------------------|
+| Aspect            | Details                                                      |
+|-------------------|--------------------------------------------------------------|
+| Predicted Class   | versicolor                                                   |
+| Contrast Class    | setosa                                                       |
+| Counterfactuals   | petal width (cm) > 0.806                                     |
+| Confidence        | 100.0%                                                       |
+| Fidelity          | 100.0%                                                       |
+| Time Taken(s)     | 0.33                                                         |
+|-------------------|--------------------------------------------------------------|"
